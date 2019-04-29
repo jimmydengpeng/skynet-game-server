@@ -10,7 +10,7 @@ function echo (cID, addr)
             skynet.error("received: "..str)
             socket.write(cID, string.upper( str ))
         else 
-            skynet.close(cID)
+            socket.close(cID)
             skynet.error(addr.."disconnected")
             return
         end
@@ -21,7 +21,7 @@ local cID, addr = ...
 cID = tonumber(cID)
 
 skynet.start(function (  )
-    skynet.fork(function
+    skynet.fork(function()
         echo(cID, addr)
         skynet.exit()
     end)
